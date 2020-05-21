@@ -1,6 +1,21 @@
 // iterators4.rs
 
-// I AM NOT DONE
+struct It {
+    num: u64
+}
+impl Iterator for It {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if 0 < self.num {
+            let num = self.num;
+            self.num -= 1;
+            Some(num)
+        } else {
+            None
+        }
+    }
+}
 
 pub fn factorial(num: u64) -> u64 {
     // Complete this function to return factorial of num
@@ -12,6 +27,7 @@ pub fn factorial(num: u64) -> u64 {
     // For the most fun don't use:
     // - recursion
     // Execute `rustlings hint iterators4` for hints.
+    It { num: num }.fold(1, |acc, x| acc * x)
 }
 
 #[cfg(test)]
